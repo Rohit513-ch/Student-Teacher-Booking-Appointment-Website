@@ -3,6 +3,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpenCheck, Calendar, MessagesSquare, School, Users } from 'lucide-react';
 import { Logo } from '@/components/logo';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 export default function Home() {
   return (
@@ -28,9 +34,22 @@ export default function Home() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          <Button variant="outline" asChild>
-            <Link href="/(auth)/login">Login</Link>
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Login</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem asChild>
+                <Link href="/(auth)/login?role=admin">Admin</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/(auth)/login?role=student">Student</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/(auth)/login?role=teacher">Teacher</Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button asChild>
             <Link href="/(auth)/register">Sign Up</Link>
           </Button>

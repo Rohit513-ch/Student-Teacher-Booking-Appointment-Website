@@ -28,14 +28,21 @@ const formSchema = z.object({
   role: z.enum(['student', 'teacher', 'admin'], { required_error: 'Please select a role.' }),
 });
 
-export function LoginForm() {
+type Role = z.infer<typeof formSchema>['role'];
+
+export function LoginForm({ defaultRole }: { defaultRole?: string }) {
   const router = useRouter();
+
+  const isValidRole = (role: any): role is Role => {
+    return ['student', 'teacher', 'admin'].includes(role);
+  }
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
       password: '',
-      role: 'student',
+      role: isValidRole(defaultRole) ? defaultRole : 'student',
     },
   });
 
