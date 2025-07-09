@@ -19,7 +19,7 @@ export default function LoginPage({ searchParams }: { searchParams?: { role?: st
           {showSignUp ? (
              <>
               Don&apos;t have an account?{' '}
-              <Link href="/(auth)/register" className="underline">
+              <Link href="/register" className="underline">
                 Sign up
               </Link>
             </>

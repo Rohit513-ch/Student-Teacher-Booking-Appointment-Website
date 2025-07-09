@@ -40,18 +40,18 @@ export default function Home() {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem asChild>
-                <Link href="/(auth)/login?role=admin">Admin</Link>
+                <Link href="/login?role=admin">Admin</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/(auth)/login?role=teacher">Teacher</Link>
+                <Link href="/login?role=teacher">Teacher</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/(auth)/login?role=student">Student</Link>
+                <Link href="/login?role=student">Student</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <Button asChild>
-            <Link href="/(auth)/register">Sign Up</Link>
+            <Link href="/register">Sign Up</Link>
           </Button>
         </div>
       </header>
@@ -70,7 +70,7 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button size="lg" asChild>
-                    <Link href="/(auth)/register">Get Started</Link>
+                    <Link href="/register">Get Started</Link>
                   </Button>
                   <Button variant="secondary" size="lg" asChild>
                      <Link href="/admin">Demo Admin</Link>

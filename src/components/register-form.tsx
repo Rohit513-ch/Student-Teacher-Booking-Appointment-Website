@@ -48,7 +48,7 @@ export function RegisterForm() {
         });
 
         // Redirect to login page after showing the toast
-        router.push('/(auth)/login');
+        router.push('/login');
     }
 
     return (
