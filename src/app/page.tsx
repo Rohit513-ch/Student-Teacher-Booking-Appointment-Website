@@ -43,10 +43,10 @@ export default function Home() {
                 <Link href="/(auth)/login?role=admin">Admin</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/(auth)/login?role=student">Student</Link>
+                <Link href="/(auth)/login?role=teacher">Teacher</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/(auth)/login?role=teacher">Teacher</Link>
+                <Link href="/(auth)/login?role=student">Student</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
