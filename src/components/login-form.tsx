@@ -95,7 +95,7 @@ export function LoginForm({ defaultRole }: { defaultRole?: string }) {
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a role" />
-                    </Trigger>
+                    </SelectTrigger>
                   </FormControl>
                   <SelectContent>
                     <SelectItem value="student">Student</SelectItem>
