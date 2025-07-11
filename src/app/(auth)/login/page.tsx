@@ -27,7 +27,7 @@ export default function LoginPage({ searchParams }: { searchParams?: { role?: st
           <span>Log in with Apple</span>
         </div>
         <div className="google-login-button">
-          <img src="https://i.ibb.co/zTFS3SRS/transparent-google-logo-google-logo-with-slogan-dont-be-1710875781881.webp" alt="Google icon" className="google-icon-img" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google icon" className="google-icon-img" />
           <span>Log in with Google</span>
         </div>
       </div>
