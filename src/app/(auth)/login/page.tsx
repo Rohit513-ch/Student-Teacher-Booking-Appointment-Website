@@ -1,12 +1,10 @@
 import { LoginForm } from '@/components/login-form';
 import Link from 'next/link';
 import { AppleIcon } from '@/components/register-form';
-import Image from 'next/image';
 
 export default function LoginPage({ searchParams }: { searchParams?: { role?: string } }) {
   const role = searchParams?.role;
   const title = role ? `${role.charAt(0).toUpperCase() + role.slice(1)} Login` : 'Welcome back';
-  const showSignUp = !role || role === 'student';
 
   return (
     <div className="form-container">
@@ -18,6 +16,11 @@ export default function LoginPage({ searchParams }: { searchParams?: { role?: st
           Sign up
         </Link>
       </p>
+      <div className="separator">
+        <hr className="line"/>
+        <span>or</span>
+        <hr className="line"/>
+      </div>
       <div className="buttons-container">
         <div className="apple-login-button">
           <AppleIcon />
