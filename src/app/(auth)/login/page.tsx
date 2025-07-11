@@ -1,6 +1,7 @@
 import { LoginForm } from '@/components/login-form';
 import Link from 'next/link';
-import { AppleIcon, GoogleIcon } from '@/components/register-form';
+import { AppleIcon } from '@/components/register-form';
+import Image from 'next/image';
 
 export default function LoginPage({ searchParams }: { searchParams?: { role?: string } }) {
   const role = searchParams?.role;
@@ -23,7 +24,7 @@ export default function LoginPage({ searchParams }: { searchParams?: { role?: st
           <span>Log in with Apple</span>
         </div>
         <div className="google-login-button">
-          <GoogleIcon />
+          <img src="https://banner2.cleanpng.com/20240216/sb/transparent-google-logo-google-logo-with-multicolored-g-and-1710875781697.webp" alt="Google icon" className="google-icon-img" />
           <span>Log in with Google</span>
         </div>
       </div>
