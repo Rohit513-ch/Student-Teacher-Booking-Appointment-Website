@@ -210,15 +210,13 @@ body {
 }
 
 .apple-login-button {
-  background-color: hsl(var(--card));
-  color: hsl(var(--foreground));
-  border: 1px solid hsl(var(--border));
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
 }
 
 .google-login-button {
-  background-color: hsl(var(--accent));
-  color: hsl(var(--accent-foreground));
-  border: 1px solid hsl(var(--accent-foreground));
+  border: 2px solid #747474;
 }
 
 .apple-icon,
