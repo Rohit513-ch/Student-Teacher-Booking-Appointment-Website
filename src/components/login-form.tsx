@@ -3,24 +3,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -37,7 +21,7 @@ export function LoginForm({ defaultRole }: { defaultRole?: string }) {
     return ['student', 'teacher', 'admin'].includes(role);
   }
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
@@ -56,62 +40,17 @@ export function LoginForm({ defaultRole }: { defaultRole?: string }) {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="name@example.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="••••••••" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {!isValidRole(defaultRole) && (
-          <FormField
-            control={form.control}
-            name="role"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Role</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a role" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="student">Student</SelectItem>
-                    <SelectItem value="teacher">Teacher</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-      </form>
-    </Form>
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <input type="email" {...register("email")} className="input" placeholder="Email" />
+      {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
+      
+      <input type="password" {...register("password")} className="input" placeholder="Password" />
+      {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
+
+      <p className="page-link">
+        <Link href="#" className="page-link-label">Forgot Password?</Link>
+      </p>
+      <button className="form-btn">Log in</button>
+    </form>
   );
 }
