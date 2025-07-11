@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -15,6 +16,26 @@ import {
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+
+const GoogleIcon = () => (
+    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <title>Google</title>
+        <path
+            d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.386-7.439-7.574s3.344-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.85l3.25-3.138C18.189 1.186 15.479 0 12.24 0 5.48 0 0 5.48 0 12s5.48 12 12.24 12c7.239 0 11.99-4.956 11.99-12.24 0-.77-.07-1.52-.19-2.235H12.24z"
+            fill="currentColor"
+        />
+    </svg>
+);
+
+const AppleIcon = () => (
+    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <title>Apple</title>
+        <path
+            d="M12.152 6.896c-.922 0-1.748-.484-2.74-1.205-.742-.544-1.485-1.088-2.485-1.088-1.288 0-2.445.83-3.172 1.944-.728 1.113-1.42 2.8-1.21 4.545.165 1.398.85 2.59 1.624 3.447.773.857 1.623 1.744 2.872 1.744 1.113 0 1.84-.544 2.804-1.205.828-.56 1.624-1.127 2.484-1.127.99 0 1.805.53 2.68 1.154.91.65 1.84.975 2.647.975.38 0 1.14-.15 1.84-.91.56-.605.813-1.397.843-2.19.03-.793-.424-1.68-.96-2.288-.439-.498-1.055-.813-1.744-.813-.498 0-1.154.212-1.84.62-.685.408-1.42.798-2.288.798-.99 0-1.933-.53-2.833-1.233-.767-.59-1.563-1.248-2.424-1.248zM9.648 24c2.398 0 3.864-1.563 5.137-1.563s2.584 1.563 4.936 1.563c2.445 0 3.88-1.547 5.18-1.547s2.613 1.547 5.093 1.547c-2.398 0-3.864-1.563-5.137-1.563s-2.584 1.563-4.936-1.563c-2.445 0-3.88 1.547-5.18 1.547s-2.613-1.547-5.093-1.547zm-5.18-20.413c.63-.8 1.548-1.31 2.533-1.31.857 0 1.563.454 2.235.989.67.534 1.484 1.14 2.47 1.14 1.112 0 1.92-.62 2.727-1.233.79-.613 1.652-1.015 2.648-1.015 1.205 0 2.22.76 2.872 1.73.65.974.27 2.634-.91 4.195-.765.96-1.623 1.745-2.92 1.745-.96 0-1.73-.502-2.584-1.08-.854-.578-1.714-1.22-2.678-1.22s-1.68.618-2.52 1.248c-.84.63-1.653 1.113-2.714 1.113-1.383 0-2.445-.94-3.097-2.03-.65-1.09-.38-2.92.827-4.51z"
+            fill="currentColor"
+        />
+    </svg>
+);
 
 
 const formSchema = z.object({
@@ -52,6 +73,7 @@ export function RegisterForm() {
     }
 
     return (
+        <>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -98,5 +120,26 @@ export function RegisterForm() {
                 </Button>
             </form>
         </Form>
+        <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">
+                Or continue with
+                </span>
+            </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+            <Button variant="outline">
+                <GoogleIcon />
+                Google
+            </Button>
+            <Button variant="outline">
+                <AppleIcon />
+                Apple
+            </Button>
+        </div>
+      </>
     );
 }
