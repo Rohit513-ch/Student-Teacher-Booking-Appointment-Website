@@ -17,12 +17,22 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { FaGoogle, FaApple } from 'react-icons/fa';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 
 const formSchema = z.object({
     name: z.string().min(2, {message: 'Name must be at least 2 characters.'}),
     email: z.string().email({ message: 'Invalid email address.' }),
     password: z.string().min(6, { message: 'Password must be at least 6 characters.' }),
+    role: z.enum(['student', 'teacher', 'admin'], {
+        required_error: 'Please select a role.',
+    }),
 });
 
 export function RegisterForm() {
@@ -95,6 +105,28 @@ export function RegisterForm() {
                         </FormItem>
                     )}
                 />
+                <FormField
+                    control={form.control}
+                    name="role"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Role</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select a role" />
+                                </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="student">Student</SelectItem>
+                                    <SelectItem value="teacher">Teacher</SelectItem>
+                                    <SelectItem value="admin">Admin</SelectItem>
+                                </SelectContent>
+                            </Select>
+                            <FormMessage className="text-red-400"/>
+                        </FormItem>
+                    )}
+                />
                 <Button type="submit" className="w-full !mt-8">
                     Create Account
                 </Button>
@@ -134,3 +166,5 @@ export const AppleIcon = () => (
         />
     </svg>
 );
+
+    
