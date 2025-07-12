@@ -17,12 +17,14 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { FaGoogle, FaApple } from 'react-icons/fa';
+import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 
 const formSchema = z.object({
     name: z.string().min(2, {message: 'Name must be at least 2 characters.'}),
     email: z.string().email({ message: 'Invalid email address.' }),
     password: z.string().min(6, { message: 'Password must be at least 6 characters.' }),
+    role: z.enum(['student', 'teacher', 'admin'], { required_error: 'Please select a role.' }),
 });
 
 export function RegisterForm() {
@@ -35,14 +37,14 @@ export function RegisterForm() {
             name: '',
             email: '',
             password: '',
+            role: 'student',
         },
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log('Registration submitted', values);
         // Here you would call your Firebase auth function to create a user
-        // and add them to a 'pendingStudents' collection in Firestore.
-        // e.g., await registerStudent(values.name, values.email, values.password);
+        // and add them to a 'pendingStudents' or appropriate collection based on role.
 
         toast({
             title: "Registration Submitted",
@@ -96,6 +98,42 @@ export function RegisterForm() {
                         </FormItem>
                     )}
                 />
+                 <FormField
+                    control={form.control}
+                    name="role"
+                    render={({ field }) => (
+                        <FormItem className="space-y-3 pt-4">
+                            <FormLabel>Register as a...</FormLabel>
+                            <FormControl>
+                                <RadioGroup
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                                className="flex space-x-4"
+                                >
+                                <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                        <RadioGroupItem value="student" />
+                                    </FormControl>
+                                    <FormLabel className="font-normal">Student</FormLabel>
+                                </FormItem>
+                                <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                        <RadioGroupItem value="teacher" />
+                                    </FormControl>
+                                    <FormLabel className="font-normal">Teacher</FormLabel>
+                                </FormItem>
+                                <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                        <RadioGroupItem value="admin" />
+                                    </FormControl>
+                                    <FormLabel className="font-normal">Admin</FormLabel>
+                                </FormItem>
+                                </RadioGroup>
+                            </FormControl>
+                            <FormMessage className="text-red-400" />
+                        </FormItem>
+                    )}
+                    />
                 <Button type="submit" className="w-full !mt-8">
                     Create Account
                 </Button>
@@ -135,3 +173,5 @@ export const AppleIcon = () => (
         />
     </svg>
 );
+
+    
