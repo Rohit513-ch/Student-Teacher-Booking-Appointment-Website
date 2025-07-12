@@ -1,4 +1,4 @@
-import type { Teacher, Appointment, StudentApproval } from './types';
+import type { Teacher, Appointment, StudentApproval, Student } from './types';
 
 export const placeholderTeachers: Teacher[] = [
   { id: '1', name: 'Dr. Emily Carter', email: 'emily.carter@university.edu', department: 'Computer Science', subject: 'Artificial Intelligence' },
@@ -19,4 +19,14 @@ export const placeholderStudentApprovals: StudentApproval[] = [
     { id: 's1', name: 'Jessica Williams', email: 'jess.w@email.com', date: '2024-05-20', department: 'Computer Science' },
     { id: 's2', name: 'Kevin Brown', email: 'kevin.b@email.com', date: '2024-05-21', department: 'Physics' },
     { id: 's3', name: 'Maria Rodriguez', email: 'maria.r@email.com', date: '2024-05-22', department: 'EEE' },
+];
+
+export const placeholderStudents: Student[] = [
+    { id: 's1', name: 'Jessica Williams', email: 'jess.w@email.com', department: 'Computer Science', status: 'pending' },
+    { id: 's2', name: 'Kevin Brown', email: 'kevin.b@email.com', department: 'Physics', status: 'pending' },
+    { id: 's3', name: 'Maria Rodriguez', email: 'maria.r@email.com', department: 'EEE', status: 'pending' },
+    { id: 's4', name: 'Alex Johnson', email: 'alex.j@email.com', department: 'History', status: 'approved' },
+    { id: 's5', name: 'John Doe', email: 'john.d@email.com', department: 'Mathematics', status: 'approved' },
+    { id: 's6', name: 'Jane Smith', email: 'jane.s@email.com', department: 'Computer Science', status: 'approved' },
+    { id: 's7', name: 'John Smith', email: 'john.smith@email.com', department: 'EEE', status: 'pending' },
 ];

@@ -3,6 +3,7 @@ import { ManageTeachers } from '@/components/dashboard/admin/manage-teachers';
 import { StudentApprovals } from '@/components/dashboard/admin/student-approvals';
 import { Badge } from '@/components/ui/badge';
 import { placeholderStudentApprovals } from '@/lib/placeholder-data';
+import { ViewAllStudents } from '@/components/dashboard/admin/view-all-students';
 
 export default function AdminDashboard() {
   return (
@@ -19,12 +20,16 @@ export default function AdminDashboard() {
                <Badge className="absolute -right-2 -top-2 h-5 w-5 justify-center p-0">{placeholderStudentApprovals.length}</Badge>
             )}
           </TabsTrigger>
+          <TabsTrigger value="all-students">View All Students</TabsTrigger>
         </TabsList>
         <TabsContent value="teachers">
           <ManageTeachers />
         </TabsContent>
         <TabsContent value="approvals">
           <StudentApprovals />
+        </TabsContent>
+        <TabsContent value="all-students">
+          <ViewAllStudents />
         </TabsContent>
       </Tabs>
     </>

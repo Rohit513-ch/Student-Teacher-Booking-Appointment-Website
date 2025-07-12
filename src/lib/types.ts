@@ -22,3 +22,11 @@ export interface StudentApproval {
     date: string;
     department: string;
 }
+
+export interface Student {
+    id: string;
+    name: string;
+    email: string;
+    department: string;
+    status: 'approved' | 'pending';
+}
