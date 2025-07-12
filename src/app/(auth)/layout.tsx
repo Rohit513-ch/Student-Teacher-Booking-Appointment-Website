@@ -12,8 +12,8 @@ export default function AuthLayout({
         <div className="shape"></div>
         <div className="shape"></div>
       </div>
-      <div className="w-full max-w-md">
-        <div className="flex justify-center mb-8">
+      <div className="flex flex-col items-center">
+        <div className="mb-8">
           <Link href="/" aria-label="Home">
             <Logo />
           </Link>
