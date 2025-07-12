@@ -20,14 +20,14 @@ export default function Home() {
         <nav className="hidden items-center gap-4 md:flex">
           <Link
             href="#features"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
             prefetch={false}
           >
             Features
           </Link>
           <Link
             href="#about"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
             prefetch={false}
           >
             About
@@ -36,7 +36,7 @@ export default function Home() {
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="transition-all hover:shadow-lg hover:shadow-primary/50">Login</Button>
+              <Button variant="link" className="text-sm font-medium text-muted-foreground decoration-muted-foreground hover:text-foreground hover:no-underline">Login</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem asChild>
