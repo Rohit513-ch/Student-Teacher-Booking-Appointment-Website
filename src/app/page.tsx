@@ -151,10 +151,10 @@ export default function Home() {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
-    <Card className="text-left">
-      <CardHeader className="flex flex-row items-center gap-4">
-        <div className="rounded-full bg-primary/10 p-3 text-primary">{icon}</div>
-        <CardTitle>{title}</CardTitle>
+    <Card className="text-left bg-card h-full">
+      <CardHeader className="flex flex-row items-start gap-4">
+        <div className="rounded-full bg-primary/20 p-3 text-primary">{icon}</div>
+        <CardTitle className="text-xl font-bold mt-2">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground">{description}</p>
