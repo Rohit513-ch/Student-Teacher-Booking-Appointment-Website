@@ -7,9 +7,13 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-950 px-4">
-      <div className="w-full max-w-md space-y-4">
-        <div className="flex justify-center">
+    <div className="auth-background">
+       <div className="background">
+        <div className="shape"></div>
+        <div className="shape"></div>
+      </div>
+      <div className="w-full max-w-md">
+        <div className="flex justify-center mb-8">
           <Link href="/" aria-label="Home">
             <Logo />
           </Link>

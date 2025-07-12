@@ -1,36 +1,30 @@
 import { LoginForm } from '@/components/login-form';
 import Link from 'next/link';
 import { AppleIcon } from '@/components/register-form';
+import { FaGoogle, FaFacebook } from 'react-icons/fa';
 
 export default function LoginPage({ searchParams }: { searchParams?: { role?: string } }) {
   const role = searchParams?.role;
-  const title = role ? `${role.charAt(0).toUpperCase() + role.slice(1)} Login` : 'Welcome back';
+  const title = role ? `${role.charAt(0).toUpperCase() + role.slice(1)} Login` : 'Login Here';
 
   return (
-    <div className="form-container">
-      <p className="title">{title}</p>
+    <div className="glass-form-container">
+      <h3>{title}</h3>
       <LoginForm defaultRole={role} />
-      <p className="sign-up-label">
+      <div className="social">
+        <div className="go">
+          <FaGoogle className="inline-block mr-2" /> Google
+        </div>
+        <div className="fb">
+          <FaFacebook className="inline-block mr-2" /> Facebook
+        </div>
+      </div>
+       <p className="sign-up-label mt-6">
         Don&apos;t have an account?{' '}
         <Link href="/register" className="sign-up-link">
           Sign up
         </Link>
       </p>
-      <div className="separator">
-        <hr className="line"/>
-        <span>or</span>
-        <hr className="line"/>
-      </div>
-      <div className="buttons-container">
-        <div className="apple-login-button">
-          <AppleIcon />
-          <span>Log in with Apple</span>
-        </div>
-        <div className="google-login-button">
-          <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png" alt="Google icon" className="google-icon-img" />
-          <span>Log in with Google</span>
-        </div>
-      </div>
     </div>
   );
 }

@@ -40,17 +40,16 @@ export function LoginForm({ defaultRole }: { defaultRole?: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form">
-      <input type="email" {...register("email")} className="input" placeholder="Email" />
-      {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+      <label htmlFor="email">Username</label>
+      <input type="email" {...register("email")} placeholder="Email" id="email" />
+      {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
       
-      <input type="password" {...register("password")} className="input" placeholder="Password" />
-      {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
+      <label htmlFor="password">Password</label>
+      <input type="password" {...register("password")} placeholder="Password" id="password"/>
+      {errors.password && <p className="text-red-400 text-xs mt-1">{errors.password.message}</p>}
 
-      <p className="page-link">
-        <Link href="#" className="page-link-label">Forgot Password?</Link>
-      </p>
-      <button className="form-btn">Log in</button>
+      <button className="form-btn">Log In</button>
     </form>
   );
 }
