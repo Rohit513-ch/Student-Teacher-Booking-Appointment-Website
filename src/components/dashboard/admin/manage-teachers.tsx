@@ -17,7 +17,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { MoreHorizontal, PlusCircle } from 'lucide-react';
+import { MoreHorizontal, PlusCircle, Search } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,6 +44,7 @@ export function ManageTeachers() {
     const [teachers, setTeachers] = useState<Teacher[]>(placeholderTeachers);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingTeacher, setEditingTeacher] = useState<Teacher | null>(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleAddOrUpdateTeacher = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -83,19 +84,39 @@ export function ManageTeachers() {
         setIsDialogOpen(true);
     }
 
+    const filteredTeachers = teachers.filter(teacher => 
+        teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        teacher.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        teacher.department.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Teachers</CardTitle>
-        <CardDescription>Manage teacher profiles and information.</CardDescription>
-        <div className="text-right">
-             <Button size="sm" className="h-8 gap-1" onClick={openAddDialog}>
-              <PlusCircle className="h-3.5 w-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                Add Teacher
-              </span>
-            </Button>
+        <div className="flex justify-between items-center">
+            <div>
+                <CardTitle>Teachers</CardTitle>
+                <CardDescription>Manage teacher profiles and information.</CardDescription>
+            </div>
+             <div className="flex items-center gap-2">
+                 <div className="relative w-full max-w-sm">
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Input 
+                        type="search"
+                        placeholder="Search by name, subject, or department..." 
+                        className="pl-8"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+                <Button size="sm" className="h-8 gap-1" onClick={openAddDialog}>
+                    <PlusCircle className="h-3.5 w-3.5" />
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                        Add Teacher
+                    </span>
+                </Button>
+            </div>
         </div>
       </CardHeader>
       <CardContent>
@@ -112,7 +133,7 @@ export function ManageTeachers() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {teachers.map((teacher) => (
+            {filteredTeachers.map((teacher) => (
               <TableRow key={teacher.id}>
                 <TableCell className="font-medium">{teacher.name}</TableCell>
                 <TableCell>{teacher.email}</TableCell>
@@ -140,7 +161,7 @@ export function ManageTeachers() {
       </CardContent>
        <CardFooter>
         <div className="text-xs text-muted-foreground">
-          Showing <strong>1-{teachers.length}</strong> of <strong>{teachers.length}</strong> teachers
+          Showing <strong>1-{filteredTeachers.length}</strong> of <strong>{filteredTeachers.length}</strong> teachers
         </div>
       </CardFooter>
 
