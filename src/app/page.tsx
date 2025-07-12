@@ -36,7 +36,7 @@ export default function Home() {
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">Login</Button>
+              <Button variant="outline" className="transition-all hover:shadow-lg hover:shadow-primary/50">Login</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem asChild>
@@ -152,9 +152,11 @@ export default function Home() {
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
     <Card className="text-left bg-card h-full">
-      <CardHeader className="flex flex-row items-start gap-4">
-        <div className="rounded-full bg-primary/20 p-3 text-primary">{icon}</div>
-        <CardTitle className="text-xl font-bold mt-2">{title}</CardTitle>
+      <CardHeader>
+        <div className="flex items-start gap-4">
+          <div className="rounded-full bg-primary/20 p-3 text-primary">{icon}</div>
+          <CardTitle className="text-xl font-bold mt-2">{title}</CardTitle>
+        </div>
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground">{description}</p>
