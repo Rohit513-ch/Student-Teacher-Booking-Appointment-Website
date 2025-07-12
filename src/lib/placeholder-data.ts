@@ -16,6 +16,7 @@ export const placeholderAppointments: Appointment[] = [
 
 
 export const placeholderStudentApprovals: StudentApproval[] = [
-    { id: 's1', name: 'Jessica Williams', email: 'jess.w@email.com', date: '2024-05-20' },
-    { id: 's2', name: 'Kevin Brown', email: 'kevin.b@email.com', date: '2024-05-21' },
+    { id: 's1', name: 'Jessica Williams', email: 'jess.w@email.com', date: '2024-05-20', department: 'Computer Science' },
+    { id: 's2', name: 'Kevin Brown', email: 'kevin.b@email.com', date: '2024-05-21', department: 'Physics' },
+    { id: 's3', name: 'Maria Rodriguez', email: 'maria.r@email.com', date: '2024-05-22', department: 'EEE' },
 ];

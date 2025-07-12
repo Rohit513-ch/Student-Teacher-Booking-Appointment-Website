@@ -20,4 +20,5 @@ export interface StudentApproval {
     name: string;
     email: string;
     date: string;
+    department: string;
 }
