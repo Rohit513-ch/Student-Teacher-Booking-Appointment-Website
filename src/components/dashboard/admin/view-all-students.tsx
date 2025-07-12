@@ -35,24 +35,22 @@ export function ViewAllStudents() {
 
   return (
     <Card>
-      <CardHeader>
-        <div className="flex justify-between items-center">
-            <div>
-                <CardTitle>All Students</CardTitle>
-                <CardDescription>
-                    View and manage all registered students.
-                </CardDescription>
-            </div>
-            <div className="relative w-full max-w-sm">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input 
-                    type="search"
-                    placeholder="Search by name, department, or email..." 
-                    className="pl-8"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-            </div>
+      <CardHeader className="flex flex-row items-center justify-between gap-4">
+        <div className="flex-1">
+          <CardTitle>All Students</CardTitle>
+          <CardDescription>
+              View and manage all registered students.
+          </CardDescription>
+        </div>
+        <div className="relative w-full max-w-sm">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input 
+                type="search"
+                placeholder="Search by name, department, or email..." 
+                className="pl-8"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
         </div>
       </CardHeader>
       <CardContent>
