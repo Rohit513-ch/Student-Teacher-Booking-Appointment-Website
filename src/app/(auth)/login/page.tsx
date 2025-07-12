@@ -1,7 +1,8 @@
 import { LoginForm } from '@/components/login-form';
 import Link from 'next/link';
-import { AppleIcon } from '@/components/register-form';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import { RegisterFormDynamic } from '@/components/register-form-dynamic';
+import { LoginFormDynamic } from '@/components/login-form-dynamic';
 
 export default function LoginPage({ searchParams }: { searchParams?: { role?: string } }) {
   const role = searchParams?.role;
@@ -10,7 +11,7 @@ export default function LoginPage({ searchParams }: { searchParams?: { role?: st
   return (
     <div className="glass-form-container">
       <h3>{title}</h3>
-      <LoginForm defaultRole={role} />
+      <LoginFormDynamic defaultRole={role} />
       <div className="social">
         <div className="go">
           <FaGoogle className="inline-block mr-2" /> Google
