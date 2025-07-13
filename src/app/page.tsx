@@ -73,9 +73,6 @@ export default function Home() {
                   <Button size="lg" asChild>
                     <Link href="/register">Get Started</Link>
                   </Button>
-                  <Button variant="secondary" size="lg" asChild>
-                     <Link href="/admin">Demo Admin</Link>
-                  </Button>
                 </div>
               </div>
               <Image
