@@ -1,3 +1,4 @@
+
 'use client';
 import { useState } from 'react';
 import {
@@ -12,9 +13,9 @@ import { Button } from '@/components/ui/button';
 import { Send } from 'lucide-react';
 
 const initialConversations = [
-    { id: 1, name: 'Dr. Emily Carter', lastMessage: 'See you then!', avatar: 'https://placehold.co/100x100.png' },
-    { id: 2, name: 'Alex Johnson', lastMessage: 'Thank you for your help.', avatar: 'https://placehold.co/100x100.png' },
-    { id: 3, name: 'Prof. Davis', lastMessage: 'Let\'s discuss this tomorrow.', avatar: 'https://placehold.co/100x100.png' },
+    { id: 1, name: 'Dr. Emily Carter', lastMessage: 'See you then!', avatar: 'https://placehold.co/100x100.png', aiHint: 'person portrait' },
+    { id: 2, name: 'Dr. Benjamin Lee', lastMessage: 'Please submit it by Friday.', avatar: 'https://placehold.co/100x100.png', aiHint: 'person portrait' },
+    { id: 3, name: 'Prof. Sophia Rodriguez', lastMessage: 'Let\'s discuss this tomorrow.', avatar: 'https://placehold.co/100x100.png', aiHint: 'person portrait' },
 ];
 
 const initialMessages = [
@@ -32,6 +33,8 @@ type Message = {
 export function Messages() {
     const [messages, setMessages] = useState<Message[]>(initialMessages);
     const [newMessage, setNewMessage] = useState('');
+    const [selectedConversation, setSelectedConversation] = useState(initialConversations[0]);
+
 
     const handleSendMessage = (e: React.FormEvent) => {
         e.preventDefault();
@@ -53,19 +56,23 @@ export function Messages() {
         <CardTitle>Messaging</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4 h-[600px]">
+        <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-4 h-[600px]">
             {/* Conversations List */}
             <div className="flex flex-col gap-2 border-r pr-4">
-                <h3 className="font-semibold text-lg">Conversations</h3>
+                <h3 className="font-semibold text-lg mb-2">Conversations</h3>
                 {initialConversations.map(conv => (
-                    <div key={conv.id} className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-muted">
+                    <div 
+                        key={conv.id} 
+                        className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors ${selectedConversation.id === conv.id ? 'bg-primary/90 text-primary-foreground' : 'hover:bg-muted'}`}
+                        onClick={() => setSelectedConversation(conv)}
+                    >
                         <Avatar>
-                            <AvatarImage src={conv.avatar} alt={conv.name} />
-                            <AvatarFallback>{conv.name.charAt(0)}</AvatarFallback>
+                            <AvatarImage src={conv.avatar} alt={conv.name} data-ai-hint={conv.aiHint}/>
+                            <AvatarFallback>{conv.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                         </Avatar>
                         <div className="flex-1 truncate">
                             <p className="font-semibold">{conv.name}</p>
-                            <p className="text-sm text-muted-foreground truncate">{conv.lastMessage}</p>
+                            <p className={`text-sm truncate ${selectedConversation.id === conv.id ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>{conv.lastMessage}</p>
                         </div>
                     </div>
                 ))}
@@ -75,10 +82,10 @@ export function Messages() {
             <div className="flex flex-col h-full">
                 <div className="flex items-center gap-3 p-2 border-b">
                     <Avatar>
-                        <AvatarImage src="https://placehold.co/100x100.png" alt="Dr. Emily Carter" data-ai-hint="person portrait" />
-                        <AvatarFallback>EC</AvatarFallback>
+                        <AvatarImage src={selectedConversation.avatar} alt={selectedConversation.name} data-ai-hint={selectedConversation.aiHint} />
+                        <AvatarFallback>{selectedConversation.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                     </Avatar>
-                    <h3 className="font-semibold text-lg">Dr. Emily Carter</h3>
+                    <h3 className="font-semibold text-lg">{selectedConversation.name}</h3>
                 </div>
                 <div className="flex-1 p-4 space-y-4 overflow-y-auto">
                     {messages.map(msg => (
