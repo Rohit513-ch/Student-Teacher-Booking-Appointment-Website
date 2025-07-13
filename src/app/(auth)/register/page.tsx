@@ -10,7 +10,7 @@ export default function RegisterPage() {
       <RegisterFormDynamic />
       <div className="mt-4 text-center text-sm">
           Already have an account?{' '}
-          <Link href="/login" className="underline font-semibold">
+          <Link href="/login" className="underline font-semibold hover:text-white/80 transition-colors">
             Login
           </Link>
         </div>
