@@ -14,46 +14,48 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="bg-white text-gray-800 shadow-md container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <Logo />
-        </Link>
-        <nav className="hidden items-center gap-4 md:flex">
-          <Link
-            href="#features"
-            className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Features
+      <header className="bg-white text-gray-800 shadow-md">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+          <Link href="#" className="flex items-center gap-2" prefetch={false}>
+            <Logo />
           </Link>
-          <Link
-            href="#about"
-            className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            About
-          </Link>
-        </nav>
-        <div className="flex items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="link" className="text-sm font-medium text-gray-500 decoration-gray-500 hover:text-gray-900 hover:no-underline">Login</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem asChild>
-                <Link href="/login?role=admin">Admin</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/login?role=teacher">Teacher</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/login?role=student">Student</Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Button asChild>
-            <Link href="/register">Sign Up</Link>
-          </Button>
+          <nav className="hidden items-center gap-4 md:flex">
+            <Link
+              href="#features"
+              className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 hover:underline underline-offset-4"
+              prefetch={false}
+            >
+              Features
+            </Link>
+            <Link
+              href="#about"
+              className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 hover:underline underline-offset-4"
+              prefetch={false}
+            >
+              About
+            </Link>
+          </nav>
+          <div className="flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="link" className="text-sm font-medium text-gray-500 decoration-gray-500 hover:text-gray-900 hover:no-underline">Login</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                  <Link href="/login?role=admin">Admin</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/login?role=teacher">Teacher</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/login?role=student">Student</Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Button asChild>
+              <Link href="/register">Sign Up</Link>
+            </Button>
+          </div>
         </div>
       </header>
       <main className="flex-1">
