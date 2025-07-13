@@ -37,16 +37,20 @@ import {
   } from "@/components/ui/dialog"
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { placeholderTeachers } from '@/lib/placeholder-data';
 import type { Teacher } from '@/lib/types';
 
-export function ManageTeachers() {
-    const [teachers, setTeachers] = useState<Teacher[]>(placeholderTeachers);
+interface ManageTeachersProps {
+    teachers: Teacher[];
+    onAddOrUpdate: (teacher: Teacher) => void;
+    onDelete: (id: string) => void;
+}
+
+export function ManageTeachers({ teachers, onAddOrUpdate, onDelete }: ManageTeachersProps) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingTeacher, setEditingTeacher] = useState<Teacher | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
 
-    const handleAddOrUpdateTeacher = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const name = formData.get('name') as string;
@@ -54,24 +58,21 @@ export function ManageTeachers() {
         const subject = formData.get('subject') as string;
         const email = formData.get('email') as string;
 
-        if (editingTeacher) {
-            // Update teacher
-            const updatedTeachers = teachers.map(t => t.id === editingTeacher.id ? {...t, name, department, subject, email} : t);
-            setTeachers(updatedTeachers);
-            console.log("Teacher updated:", { id: editingTeacher.id, name, department, subject, email });
-        } else {
-            // Add new teacher
-            const newTeacher = { id: (teachers.length + 1).toString(), name, department, subject, email};
-            setTeachers([...teachers, newTeacher]);
-            console.log("Teacher added:", newTeacher);
-        }
+        const teacherData: Teacher = {
+            id: editingTeacher ? editingTeacher.id : `t${Date.now()}`,
+            name,
+            department,
+            subject,
+            email,
+        };
+        
+        onAddOrUpdate(teacherData);
         setEditingTeacher(null);
         setIsDialogOpen(false);
     }
 
-    const handleDeleteTeacher = (id: string) => {
-        setTeachers(teachers.filter(t => t.id !== id));
-        console.log("Teacher deleted:", id);
+    const handleDelete = (id: string) => {
+        onDelete(id);
     }
 
     const openEditDialog = (teacher: Teacher) => {
@@ -150,7 +151,7 @@ export function ManageTeachers() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem onClick={() => openEditDialog(teacher)}>Edit</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleDeleteTeacher(teacher.id)}>Delete</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleDelete(teacher.id)}>Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
@@ -173,7 +174,7 @@ export function ManageTeachers() {
                         {editingTeacher ? "Update the teacher's details." : "Fill in the details for the new teacher."}
                     </DialogDescription>
                 </DialogHeader>
-                <form onSubmit={handleAddOrUpdateTeacher}>
+                <form onSubmit={handleFormSubmit}>
                     <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="name" className="text-right">Name</Label>

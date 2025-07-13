@@ -11,7 +11,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, BookMarked, User } from 'lucide-react';
-import { placeholderTeachers } from '@/lib/placeholder-data';
 import type { Teacher, Appointment } from '@/lib/types';
 import {
     Dialog,
@@ -19,9 +18,6 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-    DialogFooter,
-    DialogClose
   } from "@/components/ui/dialog";
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -32,17 +28,18 @@ import { format } from 'date-fns';
 
 
 interface BookAppointmentProps {
+  teachers: Teacher[];
   onAppointmentBooked: (appointment: Appointment) => void;
 }
 
-export function BookAppointment({ onAppointmentBooked }: BookAppointmentProps) {
+export function BookAppointment({ teachers, onAppointmentBooked }: BookAppointmentProps) {
     const [searchTerm, setSearchTerm] = useState('');
     const [isBookDialogOpen, setIsBookDialogOpen] = useState(false);
     const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
     const { toast } = useToast();
     
-    const filteredTeachers = placeholderTeachers.filter(teacher => 
+    const filteredTeachers = teachers.filter(teacher => 
         teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         teacher.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
         teacher.department.toLowerCase().includes(searchTerm.toLowerCase())
@@ -150,9 +147,7 @@ export function BookAppointment({ onAppointmentBooked }: BookAppointmentProps) {
                                 </div>
                             </div>
                             <DialogFooter>
-                                <DialogClose asChild>
-                                    <Button type="button" variant="secondary">Cancel</Button>
-                                </DialogClose>
+                                <Button type="button" variant="secondary" onClick={() => setIsBookDialogOpen(false)}>Cancel</Button>
                                 <Button type="submit">Request Appointment</Button>
                             </DialogFooter>
                         </form>

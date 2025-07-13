@@ -7,9 +7,10 @@ import { Badge } from '@/components/ui/badge';
 import {
   placeholderStudentApprovals,
   placeholderStudents,
+  placeholderTeachers,
 } from '@/lib/placeholder-data';
 import { ViewAllStudents } from '@/components/dashboard/admin/view-all-students';
-import type { Student, StudentApproval } from '@/lib/types';
+import type { Student, StudentApproval, Teacher } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
 
 export default function AdminDashboard() {
@@ -17,20 +18,18 @@ export default function AdminDashboard() {
     placeholderStudentApprovals
   );
   const [students, setStudents] = useState<Student[]>(placeholderStudents);
+  const [teachers, setTeachers] = useState<Teacher[]>(placeholderTeachers);
   const { toast } = useToast();
 
   const handleApproveStudent = (studentId: string) => {
     const studentToApprove = approvals.find((a) => a.id === studentId);
 
     if (studentToApprove) {
-      // Update the status in the main students list
       setStudents((prevStudents) =>
         prevStudents.map((s) =>
           s.id === studentId ? { ...s, status: 'approved' } : s
         )
       );
-
-      // Remove the student from the pending approvals list
       setApprovals((prevApprovals) =>
         prevApprovals.filter((a) => a.id !== studentId)
       );
@@ -41,6 +40,34 @@ export default function AdminDashboard() {
       });
     }
   };
+
+  const handleAddOrUpdateTeacher = (teacher: Teacher) => {
+    const exists = teachers.some(t => t.id === teacher.id);
+    if (exists) {
+      setTeachers(teachers.map(t => t.id === teacher.id ? teacher : t));
+       toast({
+        title: 'Teacher Updated',
+        description: `Details for ${teacher.name} have been updated.`,
+      });
+    } else {
+      setTeachers([...teachers, teacher]);
+       toast({
+        title: 'Teacher Added',
+        description: `${teacher.name} has been added to the system.`,
+      });
+    }
+  };
+
+  const handleDeleteTeacher = (teacherId: string) => {
+    const teacherName = teachers.find(t => t.id === teacherId)?.name;
+    setTeachers(teachers.filter(t => t.id !== teacherId));
+    toast({
+        title: 'Teacher Removed',
+        description: `${teacherName} has been removed.`,
+        variant: 'destructive'
+      });
+  };
+
 
   return (
     <>
@@ -61,7 +88,11 @@ export default function AdminDashboard() {
           <TabsTrigger value="all-students">View All Students</TabsTrigger>
         </TabsList>
         <TabsContent value="teachers">
-          <ManageTeachers />
+          <ManageTeachers 
+            teachers={teachers}
+            onAddOrUpdate={handleAddOrUpdateTeacher}
+            onDelete={handleDeleteTeacher}
+          />
         </TabsContent>
         <TabsContent value="approvals">
           <StudentApprovals

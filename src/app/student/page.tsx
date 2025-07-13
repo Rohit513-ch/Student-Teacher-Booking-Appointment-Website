@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { BookAppointment } from '@/components/dashboard/student/book-appointment';
 import { MyAppointments } from '@/components/dashboard/student/my-appointments';
 import { Messages } from '@/components/dashboard/shared/messages';
-import type { Appointment } from '@/lib/types';
-import { placeholderAppointments } from '@/lib/placeholder-data';
+import type { Appointment, Teacher } from '@/lib/types';
+import { placeholderAppointments, placeholderTeachers } from '@/lib/placeholder-data';
 
 export default function StudentDashboard() {
   const [appointments, setAppointments] = useState<Appointment[]>(
     placeholderAppointments
   );
+  const [teachers, setTeachers] = useState<Teacher[]>(placeholderTeachers);
 
   const handleAppointmentBooked = (newAppointment: Appointment) => {
     setAppointments((prevAppointments) => [...prevAppointments, newAppointment]);
@@ -26,7 +27,10 @@ export default function StudentDashboard() {
       </div>
       
       <div id="book">
-        <BookAppointment onAppointmentBooked={handleAppointmentBooked}/>
+        <BookAppointment 
+          teachers={teachers} 
+          onAppointmentBooked={handleAppointmentBooked}
+        />
       </div>
 
       <div id="appointments">
