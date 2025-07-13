@@ -1,33 +1,47 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+'use client';
+import { useState } from 'react';
 import { TeacherAppointments } from '@/components/dashboard/teacher/appointments';
 import { Messages } from '@/components/dashboard/shared/messages';
-import { Badge } from '@/components/ui/badge';
 import { placeholderAppointments } from '@/lib/placeholder-data';
+import type { Appointment } from '@/lib/types';
+import { useToast } from '@/hooks/use-toast';
 
 export default function TeacherDashboard() {
-  const pendingCount = placeholderAppointments.filter(a => a.status === 'pending').length;
+  const [appointments, setAppointments] = useState<Appointment[]>(
+    placeholderAppointments
+  );
+  const { toast } = useToast();
+
+  const handleStatusChange = (
+    id: string,
+    status: 'approved' | 'cancelled'
+  ) => {
+    setAppointments(
+      appointments.map((a) => (a.id === id ? { ...a, status } : a))
+    );
+    toast({
+      title: 'Appointment Updated',
+      description: `The appointment has been ${status}.`,
+    });
+  };
+
+  const teacherAppointments = appointments.filter(
+    (a) => a.teacherName === 'Dr. Emily Carter'
+  );
+
   return (
-    <>
-      <div className="flex items-center">
-        <h1 className="text-lg font-semibold md:text-2xl">Teacher Dashboard</h1>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-2xl font-semibold">Welcome, Dr. Emily Carter!</h1>
+        <p className="text-muted-foreground">
+          Here you can manage your appointments and communicate with students.
+        </p>
       </div>
-      <Tabs defaultValue="appointments">
-        <TabsList>
-          <TabsTrigger value="appointments">
-            Appointments 
-            {pendingCount > 0 && (
-              <Badge className="ml-2">{pendingCount}</Badge>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="messages">Messages</TabsTrigger>
-        </TabsList>
-        <TabsContent value="appointments">
-          <TeacherAppointments />
-        </TabsContent>
-        <TabsContent value="messages">
-          <Messages />
-        </TabsContent>
-      </Tabs>
-    </>
+      <TeacherAppointments
+        appointments={teacherAppointments}
+        onStatusChange={handleStatusChange}
+      />
+      <Messages />
+    </div>
   );
 }

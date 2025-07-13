@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -26,29 +25,24 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
-import { placeholderAppointments } from '@/lib/placeholder-data';
 import type { Appointment } from '@/lib/types';
-import { useToast } from '@/hooks/use-toast';
 
-export function TeacherAppointments() {
-    const [appointments, setAppointments] = useState<Appointment[]>(placeholderAppointments);
-    const { toast } = useToast();
+interface TeacherAppointmentsProps {
+    appointments: Appointment[];
+    onStatusChange: (id: string, status: 'approved' | 'cancelled') => void;
+}
 
-    const handleStatusChange = (id: string, status: 'approved' | 'cancelled') => {
-        setAppointments(appointments.map(a => a.id === id ? {...a, status} : a));
-        console.log(`Appointment ${id} status changed to ${status}`);
-        toast({
-            title: "Appointment Updated",
-            description: `The appointment has been ${status}.`
-        })
-    }
+
+export function TeacherAppointments({ appointments, onStatusChange }: TeacherAppointmentsProps) {
+    const pendingAppointments = appointments.filter(a => a.status === 'pending');
+    const otherAppointments = appointments.filter(a => a.status !== 'pending');
 
     return (
     <Card>
       <CardHeader>
-        <CardTitle>Upcoming Appointments</CardTitle>
+        <CardTitle>Appointment Requests</CardTitle>
         <CardDescription>
-          View and manage your scheduled appointments.
+          Review and manage your scheduled appointments with students.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -65,7 +59,8 @@ export function TeacherAppointments() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {appointments.map((appointment) => (
+            {pendingAppointments.length > 0 ? (
+                pendingAppointments.map((appointment) => (
               <TableRow key={appointment.id}>
                 <TableCell className="font-medium">{appointment.studentName}</TableCell>
                 <TableCell>{appointment.dateTime}</TableCell>
@@ -86,12 +81,32 @@ export function TeacherAppointments() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem onClick={() => handleStatusChange(appointment.id, 'approved')}>Approve</DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => handleStatusChange(appointment.id, 'cancelled')}>Cancel</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => onStatusChange(appointment.id, 'approved')}>Approve</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => onStatusChange(appointment.id, 'cancelled')}>Cancel</DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                    )}
                 </TableCell>
+              </TableRow>
+            ))
+            ) : (
+                 <TableRow>
+                    <TableCell colSpan={5} className="text-center text-muted-foreground">
+                        No pending appointment requests.
+                    </TableCell>
+                </TableRow>
+            )}
+            {otherAppointments.map((appointment) => (
+              <TableRow key={appointment.id} className="text-muted-foreground/80">
+                <TableCell className="font-medium">{appointment.studentName}</TableCell>
+                <TableCell>{appointment.dateTime}</TableCell>
+                <TableCell className="max-w-[200px] truncate">{appointment.topic}</TableCell>
+                <TableCell>
+                  <Badge variant={appointment.status === 'approved' ? 'default' : appointment.status === 'pending' ? 'secondary' : 'destructive'}>
+                    {appointment.status}
+                  </Badge>
+                </TableCell>
+                <TableCell></TableCell>
               </TableRow>
             ))}
           </TableBody>
