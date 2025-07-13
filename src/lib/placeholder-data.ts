@@ -12,6 +12,8 @@ export const placeholderAppointments: Appointment[] = [
     { id: 'a2', studentName: 'Maria Garcia', teacherName: 'Dr. Benjamin Lee', dateTime: '2024-06-16 02:30 PM', topic: 'Lab results clarification', status: 'pending' },
     { id: 'a3', studentName: 'Chris Green', teacherName: 'Dr. Emily Carter', dateTime: '2024-06-17 11:00 AM', topic: 'Thesis chapter review', status: 'pending' },
     { id: 'a4', studentName: 'Alex Johnson', teacherName: 'Prof. Sophia Rodriguez', dateTime: '2024-06-18 03:00 PM', topic: 'Question about the final essay', status: 'cancelled' },
+    { id: 'a5', studentName: 'Samantha Davis', teacherName: 'Dr. Benjamin Lee', dateTime: '2024-06-19 09:00 AM', topic: 'Reviewing quantum experiment data', status: 'approved'},
+    { id: 'a6', studentName: 'Michael Brown', teacherName: 'Dr. Jacob Miller', dateTime: '2024-06-20 01:00 PM', topic: 'Help with differential equations homework', status: 'pending'},
 ];
 
 
