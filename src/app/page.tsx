@@ -14,21 +14,21 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+      <header className="bg-white text-gray-800 shadow-md container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           <Logo />
         </Link>
         <nav className="hidden items-center gap-4 md:flex">
           <Link
             href="#features"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
+            className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 hover:underline underline-offset-4"
             prefetch={false}
           >
             Features
           </Link>
           <Link
             href="#about"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
+            className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 hover:underline underline-offset-4"
             prefetch={false}
           >
             About
@@ -37,7 +37,7 @@ export default function Home() {
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="link" className="text-sm font-medium text-muted-foreground decoration-muted-foreground hover:text-foreground hover:no-underline">Login</Button>
+              <Button variant="link" className="text-sm font-medium text-gray-500 decoration-gray-500 hover:text-gray-900 hover:no-underline">Login</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem asChild>
