@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -77,12 +78,11 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <img
-                src="https://placehold.co/600x400.png"
+              <Image
+                src="https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg"
                 width="600"
                 height="400"
                 alt="Hero"
-                data-ai-hint="education online learning"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square"
               />
             </div>
