@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, BookMarked, User } from 'lucide-react';
 import { placeholderTeachers } from '@/lib/placeholder-data';
-import type { Teacher } from '@/lib/types';
+import type { Teacher, Appointment } from '@/lib/types';
 import {
     Dialog,
     DialogContent,
@@ -28,9 +28,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { Calendar } from '@/components/ui/calendar';
 import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { format } from 'date-fns';
 
 
-export function BookAppointment() {
+interface BookAppointmentProps {
+  onAppointmentBooked: (appointment: Appointment) => void;
+}
+
+export function BookAppointment({ onAppointmentBooked }: BookAppointmentProps) {
     const [searchTerm, setSearchTerm] = useState('');
     const [isBookDialogOpen, setIsBookDialogOpen] = useState(false);
     const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
@@ -50,19 +55,25 @@ export function BookAppointment() {
     
     const handleBookingSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!selectedTeacher || !selectedDate) return;
+
         const formData = new FormData(event.currentTarget);
         const topic = formData.get('topic') as string;
 
-        console.log("Appointment booked with:", {
-            teacherId: selectedTeacher?.id,
-            date: selectedDate,
-            topic
-        });
+        const newAppointment: Appointment = {
+            id: `a${Date.now()}`,
+            studentName: 'Alex Johnson', // This would typically come from the logged-in user's context
+            teacherName: selectedTeacher.name,
+            dateTime: format(selectedDate, 'yyyy-MM-dd hh:mm a'),
+            topic,
+            status: 'pending',
+        };
+
+        onAppointmentBooked(newAppointment);
 
         toast({
             title: "Appointment Booked!",
             description: `Your appointment with ${selectedTeacher?.name} has been requested.`,
-            className: 'bg-accent text-accent-foreground'
         })
         setIsBookDialogOpen(false);
         setSelectedTeacher(null);
@@ -130,6 +141,7 @@ export function BookAppointment() {
                                         selected={selectedDate}
                                         onSelect={setSelectedDate}
                                         className="rounded-md border"
+                                        disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() - 1))}
                                     />
                                 </div>
                                  <div className="grid w-full items-center gap-1.5">

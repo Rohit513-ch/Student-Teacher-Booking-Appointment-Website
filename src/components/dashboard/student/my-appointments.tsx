@@ -16,10 +16,13 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { placeholderAppointments } from '@/lib/placeholder-data';
+import type { Appointment } from '@/lib/types';
 
-export function MyAppointments() {
-    const myAppointments = placeholderAppointments.filter(a => a.studentName === 'Alex Johnson');
+interface MyAppointmentsProps {
+    appointments: Appointment[];
+}
+
+export function MyAppointments({ appointments }: MyAppointmentsProps) {
     return (
     <Card>
       <CardHeader>
@@ -39,8 +42,8 @@ export function MyAppointments() {
             </TableRow>
           </TableHeader>
           <TableBody>
-             {myAppointments.length > 0 ? (
-                myAppointments.map((appointment) => (
+             {appointments.length > 0 ? (
+                appointments.map((appointment) => (
                 <TableRow key={appointment.id}>
                     <TableCell className="font-medium">{appointment.teacherName}</TableCell>
                     <TableCell>{appointment.dateTime}</TableCell>
@@ -64,7 +67,7 @@ export function MyAppointments() {
       </CardContent>
        <CardFooter>
         <div className="text-xs text-muted-foreground">
-          Showing <strong>1-{myAppointments.length}</strong> of <strong>{myAppointments.length}</strong> appointments
+          Showing <strong>1-{appointments.length}</strong> of <strong>{appointments.length}</strong> appointments
         </div>
       </CardFooter>
     </Card>
