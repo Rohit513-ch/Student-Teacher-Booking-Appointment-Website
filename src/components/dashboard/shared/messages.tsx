@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -8,21 +10,43 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Send } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
 
-const conversations = [
+const initialConversations = [
     { id: 1, name: 'Dr. Emily Carter', lastMessage: 'See you then!', avatar: 'https://placehold.co/100x100.png' },
     { id: 2, name: 'Alex Johnson', lastMessage: 'Thank you for your help.', avatar: 'https://placehold.co/100x100.png' },
     { id: 3, name: 'Prof. Davis', lastMessage: 'Let\'s discuss this tomorrow.', avatar: 'https://placehold.co/100x100.png' },
 ];
 
-const messages = [
+const initialMessages = [
     { id: 1, sender: 'other', text: 'Hi! I wanted to ask about the upcoming assignment.'},
     { id: 2, sender: 'me', text: 'Of course. What specifically do you need help with?'},
     { id: 3, sender: 'other', text: 'I\'m having trouble with the first question.'},
-]
+];
+
+type Message = {
+    id: number;
+    sender: 'me' | 'other';
+    text: string;
+};
 
 export function Messages() {
+    const [messages, setMessages] = useState<Message[]>(initialMessages);
+    const [newMessage, setNewMessage] = useState('');
+
+    const handleSendMessage = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (newMessage.trim() === '') return;
+
+        const newMsg: Message = {
+            id: messages.length + 1,
+            sender: 'me',
+            text: newMessage,
+        };
+
+        setMessages([...messages, newMsg]);
+        setNewMessage('');
+    }
+
   return (
     <Card>
       <CardHeader>
@@ -33,7 +57,7 @@ export function Messages() {
             {/* Conversations List */}
             <div className="flex flex-col gap-2 border-r pr-4">
                 <h3 className="font-semibold text-lg">Conversations</h3>
-                {conversations.map(conv => (
+                {initialConversations.map(conv => (
                     <div key={conv.id} className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-muted">
                         <Avatar>
                             <AvatarImage src={conv.avatar} alt={conv.name} />
@@ -51,7 +75,7 @@ export function Messages() {
             <div className="flex flex-col h-full">
                 <div className="flex items-center gap-3 p-2 border-b">
                     <Avatar>
-                        <AvatarImage src="https://placehold.co/100x100.png" alt="Dr. Emily Carter" />
+                        <AvatarImage src="https://placehold.co/100x100.png" alt="Dr. Emily Carter" data-ai-hint="person portrait" />
                         <AvatarFallback>EC</AvatarFallback>
                     </Avatar>
                     <h3 className="font-semibold text-lg">Dr. Emily Carter</h3>
@@ -66,13 +90,18 @@ export function Messages() {
                     ))}
                 </div>
                 <div className="p-2 border-t mt-auto">
-                    <div className="relative">
-                        <Input placeholder="Type a message..." className="pr-12" />
+                    <form onSubmit={handleSendMessage} className="relative">
+                        <Input 
+                            placeholder="Type a message..." 
+                            className="pr-12" 
+                            value={newMessage}
+                            onChange={(e) => setNewMessage(e.target.value)}
+                        />
                         <Button type="submit" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8">
                             <Send className="h-4 w-4" />
                             <span className="sr-only">Send</span>
                         </Button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
