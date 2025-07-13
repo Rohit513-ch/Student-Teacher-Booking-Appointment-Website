@@ -129,27 +129,35 @@ export default function StudentLayout({
           <div className="w-full flex-1">
             {/* Search removed as it is inside the BookAppointment component now */}
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <Users className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Student Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuSeparator />
-               <DropdownMenuItem asChild>
-                <Link href="/login">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Logout
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" size="icon" className="rounded-full">
+                  <Users className="h-5 w-5" />
+                  <span className="sr-only">Toggle user menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Student Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                 <DropdownMenuItem asChild>
+                  <Link href="/login">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/login">
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </Link>
+            </Button>
+          </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 bg-background">
           {children}
