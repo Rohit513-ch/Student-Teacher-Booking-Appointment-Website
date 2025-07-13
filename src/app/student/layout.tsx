@@ -47,21 +47,21 @@ export default function StudentLayout({
                 Dashboard
               </Link>
               <Link
-                href="#"
+                href="/student#book"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <Calendar className="h-4 w-4" />
                 Book Appointment
               </Link>
               <Link
-                href="#"
+                href="/student#appointments"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <Calendar className="h-4 w-4" />
                 My Appointments
               </Link>
               <Link
-                href="#"
+                href="/student#messages"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <MessagesSquare className="h-4 w-4" />
@@ -103,21 +103,21 @@ export default function StudentLayout({
                   Dashboard
                 </Link>
                  <Link
-                  href="#"
+                  href="/student#book"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Calendar className="h-5 w-5" />
                   Book Appointment
                 </Link>
                  <Link
-                  href="#"
+                  href="/student#appointments"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Calendar className="h-5 w-5" />
                   My Appointments
                 </Link>
                 <Link
-                  href="#"
+                  href="/student#messages"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <MessagesSquare className="h-5 w-5" />
