@@ -1,21 +1,40 @@
 # ConnectEd - Student-Teacher Appointment Booking System
 
-This is a Next.js application for a student-teacher appointment booking system, built with Firebase.
+This is a Next.js application for a student-teacher appointment booking system. This document provides a comprehensive overview of the application, its features, design, and technical details.
 
 ## 🚀 Project Overview
 
-**ConnectEd** is a web platform designed to streamline communication and scheduling between students, teachers, and administrators in an educational institution.
+**ConnectEd** is a web platform designed to streamline communication and scheduling between students, teachers, and administrators in an educational institution. The system provides tailored dashboards for each role, ensuring a seamless and efficient experience for all users.
 
-### ✨ Core Features:
+---
 
-*   **Role-Based Access**: Separate, tailored dashboards for Admins, Teachers, and Students.
-*   **User Authentication**: Secure login and registration powered by Firebase Authentication.
-*   **Teacher Management**: Admins can easily add, update, and remove teacher profiles.
-*   **Student Approval System**: Admins review and approve new student registrations, ensuring a secure user base.
-*   **Appointment Booking**: Students can search for teachers and book appointments based on availability.
-*   **Appointment Management**: Teachers can view their schedule, and approve or cancel upcoming appointments.
-*   **Real-time Messaging**: A built-in communication system for students and teachers to connect.
-*   **Action Logging**: Key user actions are logged for monitoring and debugging purposes.
+## ✨ Core Features
+
+| Feature                         | Admin Dashboard | Teacher Dashboard | Student Dashboard |
+| ------------------------------- | :-------------: | :---------------: | :---------------: |
+| **User Authentication**         |        ✅       |         ✅        |         ✅        |
+| **Role-Based Dashboards**       |        ✅       |         ✅        |         ✅        |
+| **Manage Teacher Profiles**     |        ✅       |                   |                   |
+| **Approve Student Accounts**    |        ✅       |                   |                   |
+| **View All Users**              |        ✅       |                   |                   |
+| **Book Appointments**           |                 |                   |         ✅        |
+| **View & Manage Appointments**  |                 |         ✅        |         ✅        |
+| **Approve/Cancel Appointments** |                 |         ✅        |                   |
+| **Real-time Messaging**         |                 |         ✅        |         ✅        |
+| **Secure Logout**               |        ✅       |         ✅        |         ✅        |
+
+---
+
+## 🔧 Implementation and Design
+
+The application is built using a modern, component-based architecture with **Next.js** and the **App Router**.
+
+*   **Frontend:** The user interface is created with **React** and styled using **Tailwind CSS**. Reusable UI components are sourced from the **ShadCN/UI** library, which allows for consistent and professional design.
+*   **Routing:** The App Router in Next.js is used to create distinct routes for different user roles (e.g., `/admin`, `/teacher`, `/student`), with each route having its own dedicated layout and dashboard.
+*   **State Management:** Component-level state is managed using React Hooks (`useState`, `useEffect`). For shared data (like teacher and appointment lists), state is "lifted up" to parent components to ensure data consistency across the UI.
+*   **Authentication Flow:** The app includes a full authentication system with login and registration pages. User roles are handled to direct users to the correct dashboard upon login.
+
+---
 
 ## 💻 Tech Stack
 
@@ -23,18 +42,40 @@ This is a Next.js application for a student-teacher appointment booking system, 
 *   **Language**: [TypeScript](https://www.typescriptlang.org/)
 *   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 *   **UI Components**: [ShadCN/UI](https://ui.shadcn.com/)
-*   **Backend & DB**: [Firebase](https://firebase.google.com/) (Authentication & Firestore)
+*   **Icons**: [Lucide React](https://lucide.dev/guide/packages/lucide-react)
+*   **Forms**: [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/) for validation
 
-## Firebase Setup
+---
 
-To run this project, you will need to create a Firebase project and configure the application.
+## 🎯 Results & Current State
+
+The result of this project is a high-fidelity, interactive prototype of the **ConnectEd** application. It successfully demonstrates the core user flows, responsive design, and functionality of the system. Key outcomes include:
+
+*   **Role-Specific Dashboards:** Fully functional interfaces for admins, teachers, and students.
+*   **Interactive Components:** Users can add/edit teachers, approve students, and book/manage appointments within the UI.
+*   **Proof of Concept:** The prototype validates the design and user experience, serving as a strong foundation for a full production build.
+
+---
+
+## 🚧 Limitations
+
+This is a prototype application and has the following limitations:
+
+*   **No Database Connection:** The app uses placeholder data (`/src/lib/placeholder-data.ts`) instead of a persistent database like Firebase Firestore. All changes are stored in memory and will be reset on a page refresh.
+*   **No Real Authentication:** The login and registration forms are functional from a UI perspective, but they do not connect to a real authentication service (like Firebase Authentication).
+*   **No Backend Logic:** All state management is handled on the client-side. There are no backend API endpoints.
+
+---
+
+## Firebase Setup (For Future Development)
+
+To connect this prototype to a live backend, you will need to set up a Firebase project.
 
 1.  **Create a Firebase Project**: Go to the [Firebase Console](https://console.firebase.google.com/) and create a new project.
 2.  **Enable Firebase Services**:
     *   **Authentication**: Enable Email/Password sign-in method.
-    *   **Firestore**: Create a new Firestore database.
-3.  **Get Config Keys**: In your Firebase project settings, find your web app's configuration keys.
-4.  **Environment Variables**: Create a `.env.local` file in the root of the project and add your Firebase configuration:
+    *   **Firestore**: Create a new Firestore database and define collections for `users`, `appointments`, and `messages`.
+3.  **Environment Variables**: Create a `.env.local` file in the root of the project and add your Firebase configuration:
 
     ```sh
     NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
