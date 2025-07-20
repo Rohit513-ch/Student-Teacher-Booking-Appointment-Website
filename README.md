@@ -47,13 +47,15 @@ The application is built using a modern, component-based architecture with **Nex
 
 ---
 
-## 🎯 Results & Current State
+## 🎯 Project Output & Results
 
-The result of this project is a high-fidelity, interactive prototype of the **ConnectEd** application. It successfully demonstrates the core user flows, responsive design, and functionality of the system. Key outcomes include:
+The primary output of this project is a **high-fidelity, interactive prototype** of the **ConnectEd** application. It serves as a tangible proof of concept that successfully demonstrates the core user flows, responsive design, and functionality of the system.
 
-*   **Role-Specific Dashboards:** Fully functional interfaces for admins, teachers, and students.
-*   **Interactive Components:** Users can add/edit teachers, approve students, and book/manage appointments within the UI.
-*   **Proof of Concept:** The prototype validates the design and user experience, serving as a strong foundation for a full production build.
+Key deliverables include:
+
+*   **Role-Specific Dashboards:** Fully functional and distinct interfaces for admins, teachers, and students, tailored to their specific tasks.
+*   **Interactive Components:** The application features interactive UI components that allow users to simulate real actions such as adding/editing teachers, approving students, and booking/managing appointments.
+*   **Validated User Experience:** The prototype validates the proposed design and user experience, providing a clear vision for the final product and serving as a strong foundation for a full production build.
 
 ---
 
